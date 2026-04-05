@@ -1,0 +1,54 @@
+# ---
+# - name: Deploy web application
+#   hosts: all
+#   become: yes
+#   gather_facts: yes
+
+#   vars_files:
+#     - vars/logos.yml
+
+#   tasks:
+#     - name: Update apt cache
+#       apt:
+#         update_cache: yes
+#         cache_valid_time: 3600
+#       when: ansible_os_family == "Debian"
+
+#     - name: Install required packages
+#       package:
+#         name:
+#           - nginx
+#           - curl
+#         state: present
+
+#     - name: Ensure nginx is running
+#       service:
+#         name: nginx
+#         state: started
+#         enabled: yes
+
+#     - name: Deploy index.html from template
+#       template:
+#         src: templates/index.html-easter_egg.j2
+#         dest: /var/www/html/index.html
+#         owner: www-data
+#         group: www-data
+#         mode: '0644'
+#       notify: Restart nginx
+
+#     - name: Verify application is accessible
+#       uri:
+#         url: "http://localhost"
+#         status_code: 200
+#       register: result
+#       retries: 3
+#       delay: 5
+#       until: result.status == 200
+
+#   handlers:
+#     - name: Restart nginx
+#       service:
+#         name: nginx
+#         state: restarted
+
+# ...
