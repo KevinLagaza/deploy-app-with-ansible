@@ -6,7 +6,7 @@
 -
 
   # Hosts: where our play will run and options it will run with
-  hosts: prod
+  hosts: prod, staging
   become: true
   # Vars: variables that will apply to the play, on all target systems
   vars_files:
