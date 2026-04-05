@@ -10,3 +10,7 @@
 2) Install both **Docker** and **Ansible** on the machine.
 
 **![Installation of prerequisites](./imgs/ansible-and-docker-install.png)**
+
+## Part 1: Deploy the app with a simple playbook file
+
+Note that we will be using the app-init folder.
