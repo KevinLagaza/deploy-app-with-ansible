@@ -17,6 +17,11 @@
 sudo apt update
 sudo apt install sshpass
 
+# Depending on whether your installed ansible or ansible-core, check that docker is included in the collection
+ansible-galaxy collection list | grep docker
+# If not, run the command below
+ansible-galaxy collection install community.docker
+
 # Generate an SSH key (if not done yet)
 ssh-keygen -t rsa -b 4096 -f ~/.ssh/ansible_key -N ""
 

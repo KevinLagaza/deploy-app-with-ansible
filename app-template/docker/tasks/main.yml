@@ -7,11 +7,10 @@
 - name: Install required packages
   apt:
     name:
-      - apt-transport-https
       - ca-certificates
       - curl
       - gnupg
-      - lsb-release
+      - python3-pip
     state: present
 
 - name: Add Docker GPG key
@@ -46,11 +45,11 @@
     groups: docker
     append: yes
 
-# - name: Install Docker SDK for Python
-#   pip:
-#     name:
-#       - docker
-#     state: present
+- name: Install Docker SDK for Python
+  pip:
+    name:
+      - docker
+    state: present
 
 - name: Verify Docker is running
   command: docker --version
