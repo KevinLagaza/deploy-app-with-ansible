@@ -5,7 +5,7 @@
     # At first, install Docker
     - role: docker
     # Secondly, install Nginx
-    - role: nginx
+    # - role: nginx
     
     # Thirdly, start the webapp instance
     # - role: webapp

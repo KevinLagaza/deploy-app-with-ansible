@@ -10,7 +10,7 @@
       - ca-certificates
       - curl
       - gnupg
-      - python3-pip
+      - python3-docker
     state: present
 
 - name: Add Docker GPG key
@@ -30,7 +30,6 @@
       - docker-ce-cli
       - containerd.io
       - docker-compose-plugin
-      - python3-docker
     state: present
     update_cache: yes
 
@@ -45,12 +44,6 @@
     name: "{{ ansible_user }}"
     groups: docker
     append: yes
-
-- name: Install Docker SDK for Python
-  pip:
-    name:
-      - docker
-    state: present
 
 - name: Verify Docker is running
   command: docker --version

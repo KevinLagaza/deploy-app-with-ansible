@@ -1,13 +1,8 @@
 ---
-- name: Create a custom Docker network
-  docker_network:
-    name: custom_net
-    driver: bridge
-
 - name: Pull Nginx Docker image
   docker_image:
     name: nginx
-    tag: nginx:1.25-alpine
+    tag: nginx:1.28.3-alpine
     source: pull
   tags:
     - pull-nginx-image
@@ -23,7 +18,7 @@
 - name: Run Nginx container
   docker_container:
     name: nginx
-    image: nginx:1.25-alpine
+    image: nginx:1.28.3-alpine
     restart_policy: unless-stopped
     ports:
       - "80:80"
