@@ -1,46 +1,48 @@
 ---
-hosts: prod, staging
-become: true
-# Vars: variables that will apply to the play, on all target systems
-vars_files:
-  - vars/logos.yml
 
-tasks:
-  - name: Définir la variable nginx_root_location en fonction de la distribution
-    set_fact:
-      nginx_root_location: "/usr/share/nginx/html"
-    when: ansible_os_family == "RedHat"
+-
+  hosts: prod, staging
+    become: true
+  # Vars: variables that will apply to the play, on all target systems
+  vars_files:
+    - vars/logos.yml
 
-  - name: Définir la variable nginx_root_location pour Ubuntu
-    set_fact:
-      nginx_root_location: "/var/www/html"
-    when: ansible_os_family == "Debian"
+  tasks:
+    - name: Définir la variable nginx_root_location en fonction de la distribution
+      set_fact:
+        nginx_root_location: "/usr/share/nginx/html"
+      when: ansible_os_family == "RedHat"
 
-  - name: Install EPEL
-    yum:
-      name: epel-release
-      update_cache: yes
-      state: latest
-    when: ansible_distribution == 'CentOS'
+    - name: Définir la variable nginx_root_location pour Ubuntu
+      set_fact:
+        nginx_root_location: "/var/www/html"
+      when: ansible_os_family == "Debian"
 
-  - name: Template index.html-easter_egg.j2 to index.html on target
-    template:
-      src: index.html-easter_egg.j2
-      dest: "{{ nginx_root_location }}/index.html"
-      mode: 0644
-    notify: Restart nginx container
+    - name: Install EPEL
+      yum:
+        name: epel-release
+        update_cache: yes
+        state: latest
+      when: ansible_distribution == 'CentOS'
 
-  - name: Install unzip
-    package:
-      name: unzip
-      state: latest
+    - name: Template index.html-easter_egg.j2 to index.html on target
+      template:
+        src: index.html-easter_egg.j2
+        dest: "{{ nginx_root_location }}/index.html"
+        mode: 0644
+      notify: Restart nginx container
 
-  - name: Unarchive playbook stacker game
-    unarchive:
-      src: playbook_stacker.zip
-      dest: "{{ nginx_root_location }}"
-      mode: 0755
-    notify: Restart nginx container
+    - name: Install unzip
+      package:
+        name: unzip
+        state: latest
+
+    - name: Unarchive playbook stacker game
+      unarchive:
+        src: playbook_stacker.zip
+        dest: "{{ nginx_root_location }}"
+        mode: 0755
+      notify: Restart nginx container
 
 ...
 
