@@ -1,6 +1,6 @@
 ---
 - name: Create a custom Docker network
-  community.docker.docker_network:
+  docker_network:
     name: custom_net
     driver: bridge
 
@@ -24,7 +24,7 @@
   docker_container:
     name: nginx
     image: nginx:1.25-alpine
-    state: started
+    restart_policy: unless-stopped
     ports:
       - "80:80"
     networks:
