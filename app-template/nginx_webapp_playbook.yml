@@ -1,5 +1,6 @@
 ---
-- hosts: prod, staging
+- name: Deploy all the roles
+  hosts: prod, staging
   become: true
 
   roles:  

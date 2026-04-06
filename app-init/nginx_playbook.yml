@@ -2,7 +2,7 @@
 # YAML documents begin with the document separator ---
 
 # The minus in YAML this indicates a list item.
--
+- name: Deploy Nginx
 
   # Hosts: where our play will run and options it will run with
   hosts: prod, staging
