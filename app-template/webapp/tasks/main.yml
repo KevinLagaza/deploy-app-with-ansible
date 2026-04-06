@@ -1,6 +1,8 @@
 ---
 
 -
+
+
   hosts: prod, staging
   become: true
   # Vars: variables that will apply to the play, on all target systems
