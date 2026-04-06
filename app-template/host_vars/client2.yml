@@ -1,1 +1,4 @@
-ansible_host: <FIX IT>
+---
+ansible_host: 44.208.35.91
+
+...

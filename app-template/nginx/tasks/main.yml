@@ -7,12 +7,12 @@
 - name: Pull Nginx Docker image
   docker_image:
     name: nginx
-    tag: latest
+    tag: nginx:1.28.3-alpine
     source: pull
   tags:
     - pull-nginx-image
 
-- name: Copier la configuration Nginx
+- name: Copy the Nginx configuration 
   ansible.builtin.copy:
     src: nginx.conf
     dest: /tmp/nginx.conf
@@ -23,7 +23,7 @@
 - name: Run Nginx container
   docker_container:
     name: nginx
-    image: nginx:latest
+    image: nginx:1.28.3-alpine
     state: started
     ports:
       - "80:80"
@@ -40,3 +40,5 @@
     state: started
   tags:
     - ensure-nginx-running
+
+...

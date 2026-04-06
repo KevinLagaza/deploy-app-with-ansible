@@ -47,6 +47,10 @@ ansible-playbook nginx_playbook.yml --limit prod
 
 **![ansible execution](./imgs/ansible-staging.png)**
 
-Then, type **IP_ADRESS:80** in your browser.
+Then, type **<PUBLIC_IP_ADRESS>:80** in your browser.
 
 **![testing app in staging](./imgs/ansible-staging-result.png)**
+
+## Part 2 : Deployment of a containerized application et Nginx by using **ansible roles**
+
+In this section, we are using the **app-template** folder.
