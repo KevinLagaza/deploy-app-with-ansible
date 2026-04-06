@@ -30,6 +30,7 @@
       - docker-ce-cli
       - containerd.io
       - docker-compose-plugin
+      - python3-docker
     state: present
     update_cache: yes
 
