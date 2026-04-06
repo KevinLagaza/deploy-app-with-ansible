@@ -7,18 +7,18 @@
 ## Prerequisites
 
 - 1) Create an **AWS account** if not done yet.
-- 2) Create an EC2 VM, then install both **Docker** and **Ansible** on the machine.
+- 2) Create a AWS key PEM to allow communication between the ansible instance and both staging and production servers.
+- 3) Create an EC2 VM, then install both **Docker** and **Ansible** on the machine.
 
 **![Installation of prerequisites](./imgs/ansible-and-docker-install.png)**
 
-- 3) Create two EC2 VMs for both staging and production environments.
-- 4) Create a key-pair to allow communication between both staging and production environments.
+- 4) Create two EC2 VMs for both staging and production environments.
 
 ```bash
 # Install sshpass
 sudo apt update
 sudo apt install sshpass
-# Copy the AWS key PEM used to launch the ansible instance to both staging and production servers 
+# Copy the AWS key PEM used
 vi ~/.ssh/aws-key.pem
 # Define the right permissions
 chmod 400 ~/.ssh/aws-key.pem
