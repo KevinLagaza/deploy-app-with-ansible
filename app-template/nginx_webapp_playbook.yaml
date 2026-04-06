@@ -2,10 +2,12 @@
 - hosts: prod, staging
   become: true
   roles:
-    # Firstly, execute the Nginx role
+    # At first, install Docker
+    - role: docker
+    # Secondly, install Nginx
     - role: nginx
     
-    # # Secondly, start the webapp instance
+    # Thirdly, start the webapp instance
     # - role: webapp
     #   vars:
     #     container_name: "webapp1"
