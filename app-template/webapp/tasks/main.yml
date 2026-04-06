@@ -2,7 +2,7 @@
 
 -
   hosts: prod, staging
-    become: true
+  become: true
   # Vars: variables that will apply to the play, on all target systems
   vars_files:
     - vars/logos.yml
