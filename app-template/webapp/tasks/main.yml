@@ -1,15 +1,14 @@
 ---
-
--
-
-
+- name: Deploy webapp content
   hosts: prod, staging
   become: true
+
   # Vars: variables that will apply to the play, on all target systems
   vars_files:
     - vars/logos.yml
 
   tasks:
+
     - name: Définir la variable nginx_root_location en fonction de la distribution
       set_fact:
         nginx_root_location: "/usr/share/nginx/html"
