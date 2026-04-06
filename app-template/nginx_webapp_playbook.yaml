@@ -1,15 +1,15 @@
 ---
-- hosts: prod
+- hosts: prod, staging
   become: true
   roles:
     # Firstly, execute the Nginx role
     - role: nginx
     
-    # Secondly, start the webapp instance
-    - role: webapp
-      vars:
-        container_name: "webapp1"
-        app_port: 8082
-        target_dir: "{%- if ansible_distribution == 'CentOS' -%}/usr/share/nginx/html{%- elif ansible_distribution == 'Ubuntu' -%}/var/www/html{%- endif %}"
+    # # Secondly, start the webapp instance
+    # - role: webapp
+    #   vars:
+    #     container_name: "webapp1"
+    #     app_port: 8082
+    #     target_dir: "{%- if ansible_distribution == 'CentOS' -%}/usr/share/nginx/html{%- elif ansible_distribution == 'Ubuntu' -%}/var/www/html{%- endif %}"
 
 ...
