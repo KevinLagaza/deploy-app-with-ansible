@@ -1,17 +1,21 @@
 ---
 - hosts: prod, staging
   become: true
-  roles:
+
+  roles:  
     # At first, install Docker
     - role: docker
     # Secondly, install Nginx
-    # - role: nginx
-    
+    - role: nginx
     # Thirdly, start the webapp instance
-    # - role: webapp
-    #   vars:
-    #     container_name: "webapp1"
-    #     app_port: 8082
-    #     target_dir: "{%- if ansible_distribution == 'CentOS' -%}/usr/share/nginx/html{%- elif ansible_distribution == 'Ubuntu' -%}/var/www/html{%- endif %}"
+    - role: webapp
+      vars:
+        container_name: "webapp-app"
+        app_port: 82
+        # target_dir: "{%- if ansible_distribution == 'CentOS' -%}/usr/share/nginx/html{%- elif ansible_distribution == 'Ubuntu' -%}/var/www/html{%- endif %}"
+  post_tasks:
+    - name: Display result
+      debug:
+        msg: "Application deployed successfully on {{ inventory_hostname }}"
 
 ...

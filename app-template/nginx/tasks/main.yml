@@ -1,8 +1,13 @@
 ---
+- name: Stop and remove existing Nginx container
+  docker_container:
+    name: nginx
+    state: absent
+
 - name: Pull Nginx Docker image
   docker_image:
     name: nginx
-    tag: nginx:1.28.3-alpine
+    tag: 1.29.7-alpine
     source: pull
   tags:
     - pull-nginx-image
@@ -18,22 +23,17 @@
 - name: Run Nginx container
   docker_container:
     name: nginx
-    image: nginx:1.28.3-alpine
+    image: nginx:1.29.7-alpine
     restart_policy: unless-stopped
+    image_name_mismatch: recreate
+    state: started
     ports:
-      - "80:80"
+      - "81:80"
     networks:
       - name: custom_net
     volumes:
       - /tmp/nginx.conf:/etc/nginx/nginx.conf:ro
   tags:
     - run-nginx-container
-
-- name: Ensure Nginx container is running
-  docker_container:
-    name: nginx
-    state: started
-  tags:
-    - ensure-nginx-running
 
 ...

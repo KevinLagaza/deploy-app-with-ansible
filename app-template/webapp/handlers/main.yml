@@ -1,2 +1,14 @@
 ---
-# handlers file for webapp
+- name: Restart nginx container
+  docker_container:
+    name: nginx
+    state: started
+    restart: yes
+
+- name: Check HTTP Service
+  uri:
+    url: "http://{{ ansible_default_ipv4.address }}"
+    status_code: 200
+  retries: 3
+  delay: 5
+...
