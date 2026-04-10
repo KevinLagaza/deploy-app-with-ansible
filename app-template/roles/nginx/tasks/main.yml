@@ -1,10 +1,10 @@
 ---
 - name: Stop and disable system Nginx
   ansible.builtin.service:
-    name: nginx
+    name: nginx.systemd_service
     state: stopped
-    enabled: no
-    ignore_errors: yes
+    enabled: false
+    # ignore_errors: yes
 
 - name: Stop and remove existing Nginx container
   docker_container:
