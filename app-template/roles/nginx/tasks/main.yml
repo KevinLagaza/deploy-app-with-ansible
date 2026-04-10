@@ -1,7 +1,14 @@
 ---
+- name: Stop and disable system Nginx
+  ansible.builtin.service:
+    name: nginx
+    state: stopped
+    enabled: no
+    ignore_errors: yes
+
 - name: Stop and remove existing Nginx container
   docker_container:
-    name: nginx_container_name
+    name: "{{ container_name | default('nginx') }}"
     state: absent
 
 - name: Remove existing nginx.conf if it's in a directory
@@ -32,7 +39,7 @@
 
 - name: Run Nginx container
   docker_container:
-    name: nginx
+    name: "{{ container_name | default('nginx') }}"
     image: nginx:1.29.7-alpine
     restart_policy: unless-stopped
     image_name_mismatch: recreate
