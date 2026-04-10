@@ -1,7 +1,7 @@
 ---
 - name: Stop and disable system Nginx
   ansible.builtin.service:
-    name: nginx.systemd_service
+    name: nginx.service
     state: stopped
     enabled: false
     # ignore_errors: yes
