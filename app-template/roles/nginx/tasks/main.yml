@@ -9,6 +9,11 @@
     path: /tmp/nginx.conf
     state: absent
 
+- name: Create a custom Docker network
+  community.docker.docker_network:
+    name: custom_net
+    driver: bridge
+
 - name: Pull Nginx Docker image
   docker_image:
     name: nginx

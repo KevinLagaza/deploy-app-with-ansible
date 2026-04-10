@@ -59,3 +59,11 @@ Then, type **<PUBLIC_IP_ADRESS>:80** in your browser.
 ## Part 2 : Deployment of a containerized application et Nginx by using **ansible roles**
 
 In this section, we are using the **app-template** folder.
+
+
+```bash
+cd app-template
+
+ansible-playbook nginx_webapp_playbook.yml --limit staging
+ansible-playbook nginx_webapp_playbook.yml --limit prod
+```

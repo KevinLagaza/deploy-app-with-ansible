@@ -16,9 +16,5 @@
       vars:
         container_name: "webapp"
         app_port: 82
-  post_tasks:
-    - name: Display result
-      debug:
-        msg: "Application deployed successfully on {{ inventory_hostname }}"
 
 ...
