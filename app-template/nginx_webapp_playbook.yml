@@ -1,12 +1,11 @@
 ---
 - name: Deploy webapp content
-  hosts: prod, staging
+  hosts: staging, prod
   become: true
 
   vars_files:
     - vars/logos.yml
     
-
   roles:  
     # At first, install Docker
     - role: docker

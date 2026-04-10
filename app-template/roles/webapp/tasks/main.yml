@@ -1,8 +1,4 @@
 ---
-# - name: Load logo variables
-#   ansible.builtin.include_vars:
-#     file: "./roles/webapp/vars/logos.yml"
-
 - name: Set nginx_root_location for RedHat
   set_fact:
     nginx_root_location: "/usr/share/nginx/html"
