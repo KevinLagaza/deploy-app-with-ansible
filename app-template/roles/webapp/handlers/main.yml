@@ -1,7 +1,7 @@
 ---
-- name: Restart nginx container
+- name: Restart webapp container
   docker_container:
-    name: nginx
+    name: "{{ container_name }}"
     state: started
     restart: yes
 

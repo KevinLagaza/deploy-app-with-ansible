@@ -1,4 +1,5 @@
 ---
-# defaults file for nginx
+container_name: "nginx"
+app_port: 80
 
 ...

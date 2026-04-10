@@ -21,13 +21,13 @@
 - name: Install unzip
   package:
     name: unzip
-    state: latest
+    state: present
 
 - name: Install EPEL
   yum:
     name: epel-release
     update_cache: yes
-    state: latest
+    state: present
   when: ansible_distribution == 'CentOS'
 
 # Deploy the stack playbook game
@@ -43,12 +43,12 @@
     dest: "{{ nginx_root_location }}"
     remote_src: yes
     mode: '0755'
-  notify: Restart nginx container
+  notify: Restart webapp container
 
 # Verify the deployment
 - name: Verify application is accessible
   ansible.builtin.uri:
-    url: "http://localhost"
+    url: "http://localhost:{{ app_port }}"
     status_code: 200
   register: health_check
   retries: 3
@@ -57,7 +57,7 @@
 
 - name: Display deployment status
   ansible.builtin.debug:
-    msg: "Application deployed successfully at http://{{ ansible_default_ipv4.address }}"
+    msg: "Application deployed successfully at http://{{ ansible_default_ipv4.address }}:{{ app_port }}"
 
 ...
 

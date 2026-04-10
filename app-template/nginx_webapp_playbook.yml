@@ -15,6 +15,6 @@
     - role: webapp
       vars:
         container_name: "webapp"
-        app_port: 82
+        app_port: 8082
 
 ...

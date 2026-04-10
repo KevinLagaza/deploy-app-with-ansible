@@ -67,3 +67,5 @@ cd app-template
 ansible-playbook nginx_webapp_playbook.yml --limit staging
 ansible-playbook nginx_webapp_playbook.yml --limit prod
 ```
+
+**![testing containerized app in staging](./imgs/container-app.png)**
