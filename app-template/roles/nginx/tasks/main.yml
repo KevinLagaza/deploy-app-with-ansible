@@ -1,7 +1,7 @@
 ---
 - name: Stop and remove existing Nginx container
   docker_container:
-    name: nginx
+    name: nginx_container_name
     state: absent
 
 - name: Remove existing nginx.conf if it's in a directory
@@ -38,7 +38,7 @@
     image_name_mismatch: recreate
     state: started
     ports:
-      - "{{app_port}}:80"
+      - "{{nginx_port}}:80"
     networks:
       - name: custom_net
     volumes:
