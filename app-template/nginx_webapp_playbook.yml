@@ -5,6 +5,7 @@
 
   vars_files:
     - vars/logos.yml
+    
 
   roles:  
     # At first, install Docker
