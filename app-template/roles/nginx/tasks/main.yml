@@ -38,7 +38,7 @@
     image_name_mismatch: recreate
     state: started
     ports:
-      - "81:80"
+      - "{{app_port}}:80"
     networks:
       - name: custom_net
     volumes:
