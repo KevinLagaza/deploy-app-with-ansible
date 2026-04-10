@@ -1,4 +1,5 @@
 ---
+# Define variables
 - name: Set nginx_root_location for RedHat
   set_fact:
     nginx_root_location: "/usr/share/nginx/html"
@@ -9,6 +10,19 @@
     nginx_root_location: "/var/www/html"
   when: ansible_os_family == "Debian"
 
+# Create the directory
+- name: Create webapp directory
+  ansible.builtin.file:
+    path: "{{ nginx_root_location }}"
+    state: directory
+    mode: '0755'
+
+# Install dependencies
+- name: Install unzip
+  package:
+    name: unzip
+    state: latest
+
 - name: Install EPEL
   yum:
     name: epel-release
@@ -16,24 +30,34 @@
     state: latest
   when: ansible_distribution == 'CentOS'
 
-- name: Template index.html-easter_egg.j2 to index.html on target
-  template:
-    src: index.html-easter_egg.j2
-    dest: "{{ nginx_root_location }}/index.html"
-    mode: 0644
-  notify: Restart nginx container
-
-- name: Install unzip
-  package:
-    name: unzip
-    state: latest
+# Deploy the stack playbook game
+- name: Copy playbook stacker archive
+  ansible.builtin.copy:
+    src: playbook_stacker.zip
+    dest: /tmp/playbook_stacker.zip
+    mode: '0644'
 
 - name: Unarchive playbook stacker game
-  unarchive:
-    src: playbook_stacker.zip
+  ansible.builtin.unarchive:
+    src: /tmp/playbook_stacker.zip
     dest: "{{ nginx_root_location }}"
-    mode: 0755
+    remote_src: yes
+    mode: '0755'
   notify: Restart nginx container
+
+# Verify the deployment
+- name: Verify application is accessible
+  ansible.builtin.uri:
+    url: "http://localhost"
+    status_code: 200
+  register: health_check
+  retries: 3
+  delay: 5
+  until: health_check.status == 200
+
+- name: Display deployment status
+  ansible.builtin.debug:
+    msg: "Application deployed successfully at http://{{ ansible_default_ipv4.address }}"
 
 ...
 

@@ -16,7 +16,6 @@
       vars:
         container_name: "webapp"
         app_port: 82
-        # target_dir: "{%- if ansible_distribution == 'CentOS' -%}/usr/share/nginx/html{%- elif ansible_distribution == 'Ubuntu' -%}/var/www/html{%- endif %}"
   post_tasks:
     - name: Display result
       debug:
