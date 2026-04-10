@@ -4,6 +4,11 @@
     name: nginx
     state: absent
 
+- name: Remove existing nginx.conf if it's in a directory
+  ansible.builtin.file:
+    path: /tmp/nginx.conf
+    state: absent
+
 - name: Pull Nginx Docker image
   docker_image:
     name: nginx
