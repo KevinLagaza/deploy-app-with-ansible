@@ -1,7 +1,10 @@
 ---
-- name: Deploy all the roles
+- name: Deploy webapp content
   hosts: prod, staging
   become: true
+
+  vars_files:
+    - vars/logos.yml
 
   roles:  
     # At first, install Docker
@@ -11,7 +14,7 @@
     # Thirdly, start the webapp instance
     - role: webapp
       vars:
-        container_name: "webapp-app"
+        container_name: "webapp"
         app_port: 82
         # target_dir: "{%- if ansible_distribution == 'CentOS' -%}/usr/share/nginx/html{%- elif ansible_distribution == 'Ubuntu' -%}/var/www/html{%- endif %}"
   post_tasks:
