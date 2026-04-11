@@ -1,3 +1,6 @@
 ---
-# defaults file for webapp
+container_name: "webapp"
+app_port: 80
+
+...
 

@@ -5,4 +5,10 @@
     state: started
     restart: yes
 
+- name: Restart nginx-proxy container
+  community.docker.docker_container:
+    name: nginx-proxy
+    state: started
+    restart: yes
+
 ...

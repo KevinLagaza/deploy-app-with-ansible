@@ -10,8 +10,7 @@
     nginx_root_location: "/var/www/html"
   when: ansible_os_family == "Debian"
 
-# Create the directory
-- name: Create webapp directory
+- name: Create webapp directory on host
   ansible.builtin.file:
     path: "{{ nginx_root_location }}"
     state: directory
@@ -30,6 +29,13 @@
     state: present
   when: ansible_distribution == 'CentOS'
 
+- name: Template index.html to target
+  ansible.builtin.template:
+    src: index.html-easter_egg.j2
+    dest: "{{ nginx_root_location }}/index.html"
+    mode: '0644'
+  notify: Restart webapp container
+
 # Deploy the stack playbook game
 - name: Copy playbook stacker archive
   ansible.builtin.copy:
@@ -45,7 +51,30 @@
     mode: '0755'
   notify: Restart webapp container
 
+- name: Stop and remove existing webapp container
+  docker_container:
+    name: {{ container_name }}
+    state: absent
+
+- name: Run webapp container
+  community.docker.docker_container:
+    name: {{ container_name }}
+    image: nginx:1.29.7-alpine
+    state: started
+    restart_policy: unless-stopped
+    image_name_mismatch: recreate
+    networks:
+      - name: custom_net
+    volumes:
+      - "{{ nginx_root_location }}:/usr/share/nginx/html:ro"
+
 # Verify the deployment
+- name: Wait for proxy to be ready
+  ansible.builtin.wait_for:
+    port: "{{ app_port }}"
+    delay: 3
+    timeout: 15
+
 - name: Verify application is accessible
   ansible.builtin.uri:
     url: "http://localhost:{{ app_port }}"
@@ -57,7 +86,10 @@
 
 - name: Display deployment status
   ansible.builtin.debug:
-    msg: "Application deployed successfully at http://{{ ansible_default_ipv4.address }}:{{ app_port }}"
+    msg: |
+      Deployment successful!
+      Application URL: http://{{ ansible_default_ipv4.address }}:{{ app_port }}
+      Architecture: nginx-proxy:{{ app_port }} to webapp:80
 
 ...
 

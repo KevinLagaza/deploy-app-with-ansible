@@ -1,25 +1,24 @@
 ---
+- name: Create a custom Docker network
+  community.docker.docker_network:
+    name: custom_net
+    driver: bridge
+
 - name: Stop and disable system Nginx
   ansible.builtin.service:
     name: nginx.service
     state: stopped
     enabled: false
-    # ignore_errors: yes
 
 - name: Stop and remove existing Nginx container
   docker_container:
-    name: "{{ container_name | default('nginx') }}"
+    name: "{{ container_name }}"
     state: absent
 
 - name: Remove existing nginx.conf if it's in a directory
   ansible.builtin.file:
     path: /tmp/nginx.conf
     state: absent
-
-- name: Create a custom Docker network
-  community.docker.docker_network:
-    name: custom_net
-    driver: bridge
 
 - name: Pull Nginx Docker image
   docker_image:
@@ -39,13 +38,13 @@
 
 - name: Run Nginx container
   docker_container:
-    name: "{{ container_name | default('nginx') }}"
+    name: "{{ container_name }}"
     image: nginx:1.29.7-alpine
     restart_policy: unless-stopped
     image_name_mismatch: recreate
     state: started
     ports:
-      - "{{nginx_port}}:80"
+      - "{{app_port}}:80"
     networks:
       - name: custom_net
     volumes:
