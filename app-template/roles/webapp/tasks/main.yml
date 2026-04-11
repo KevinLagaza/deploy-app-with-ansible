@@ -69,11 +69,11 @@
       - "{{ nginx_root_location }}:/usr/share/nginx/html:ro"
 
 # Verify the deployment
-- name: Wait for proxy to be ready
-  ansible.builtin.wait_for:
-    port: "{{ app_port }}"
-    delay: 3
-    timeout: 15
+# - name: Wait for proxy to be ready
+#   ansible.builtin.wait_for:
+#     port: "{{ app_port }}"
+#     delay: 3
+#     timeout: 15
 
 - name: Verify application is accessible
   ansible.builtin.uri:
