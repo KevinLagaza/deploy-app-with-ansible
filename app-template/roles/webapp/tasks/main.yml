@@ -78,7 +78,6 @@
 - name: Verify application is accessible
   ansible.builtin.uri:
     url: "http://localhost:{{ app_port }}"
-    # url: "http://44.211.80.118:{{ app_port }}"
     status_code: 200
   register: health_check
   retries: 3
