@@ -6,14 +6,13 @@
   vars_files:
     - vars/logos.yml
   
-  vars:
-    app_port: 82
-    
   roles:  
     # At first, install Docker
     - role: docker
     # Secondly, install Nginx
     - role: nginx
+      vars:
+        app_port: 82
     # Thirdly, start the webapp instance
     - role: webapp
 
