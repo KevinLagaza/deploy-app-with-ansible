@@ -12,7 +12,7 @@
 
 - name: Stop and remove existing Nginx container
   docker_container:
-    name: "{{ container_name }}"
+    name: nginx-proxy
     state: absent
 
 - name: Remove existing nginx.conf if it's in a directory
@@ -38,7 +38,7 @@
 
 - name: Run Nginx container
   docker_container:
-    name: "{{ container_name }}"
+    name: nginx-proxy
     image: nginx:1.29.7-alpine
     restart_policy: unless-stopped
     image_name_mismatch: recreate

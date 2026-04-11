@@ -14,6 +14,8 @@
     - role: docker
     # Secondly, install Nginx
     - role: nginx
+      vars:
+        container_name: nginx-proxy
     # Thirdly, start the webapp instance
     - role: webapp
 
