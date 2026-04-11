@@ -60,6 +60,7 @@ Then, type **<PUBLIC_IP_ADRESS>:80** in your browser.
 
 In this section, we are using the **app-template** folder.
 
+1) Launch the playbook
 
 ```bash
 cd app-template
@@ -67,5 +68,11 @@ cd app-template
 ansible-playbook nginx_webapp_playbook.yml --limit staging
 ansible-playbook nginx_webapp_playbook.yml --limit prod
 ```
+
+2) Go to staging server and type: **sudo docker ps**
+
+**![Containers creation in staging](./imgs/containers.png)**
+
+3) Go the browser and type **http://<PUBLIC_IP>:82**.
 
 **![testing containerized app in staging](./imgs/container-app.png)**
