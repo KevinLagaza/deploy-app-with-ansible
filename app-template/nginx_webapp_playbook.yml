@@ -6,8 +6,8 @@
   vars_files:
     - vars/logos.yml
   
-  # vars:
-  #   app_port: 82
+  vars:
+    app_port: 82
   
   roles:  
     # At first, install Docker

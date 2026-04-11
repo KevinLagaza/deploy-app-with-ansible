@@ -1,5 +1,5 @@
 ---
 container_name: "webapp-prod"
-app_port: 82
+# app_port: 82
 
 ...

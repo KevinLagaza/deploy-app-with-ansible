@@ -1,5 +1,5 @@
 ---
 container_name: "nginx-proxy"
-app_port: 80
+# app_port: 80
 
 ...

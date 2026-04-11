@@ -1,5 +1,5 @@
 ---
 container_name: "webapp-staging"
-app_port: 82
+# app_port: 82
 
 ...
