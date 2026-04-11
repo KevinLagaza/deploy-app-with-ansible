@@ -1,6 +1,5 @@
 ---
 container_name: "webapp"
-app_port: 80
 
 ...
 

@@ -53,12 +53,12 @@
 
 - name: Stop and remove existing webapp container
   docker_container:
-    name: {{ container_name }}
+    name: "{{ container_name }}"
     state: absent
 
 - name: Run webapp container
   community.docker.docker_container:
-    name: {{ container_name }}
+    name: "{{ container_name }}"
     image: nginx:1.29.7-alpine
     state: started
     restart_policy: unless-stopped
