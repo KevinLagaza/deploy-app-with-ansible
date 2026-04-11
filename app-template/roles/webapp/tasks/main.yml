@@ -53,12 +53,12 @@
 
 - name: Stop and remove existing webapp container
   docker_container:
-    name: "{{ container_name }}"
+    name: webapp
     state: absent
 
 - name: Run webapp container
   community.docker.docker_container:
-    name: "{{ container_name }}"
+    name: webapp
     image: nginx:1.29.7-alpine
     state: started
     restart_policy: unless-stopped
@@ -77,8 +77,8 @@
 
 - name: Verify application is accessible
   ansible.builtin.uri:
-    # url: "http://localhost:{{ app_port }}"
-    url: "http://44.211.80.118:{{ app_port }}"
+    url: "http://localhost:{{ app_port }}"
+    # url: "http://44.211.80.118:{{ app_port }}"
     status_code: 200
   register: health_check
   retries: 3
