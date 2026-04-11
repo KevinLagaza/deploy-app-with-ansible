@@ -7,7 +7,7 @@
 ## Prerequisites
 
 - 1) Create an **AWS account** if not done yet.
-- 2) Create two EC2 VMs for both staging and production environments.
+- 2) Create two EC2 VMs for both staging and production environments. Edit your security group to allow traffic reaching our port 82.
 - 3) Create an EC2 VM, then install both **Docker** and **Ansible** on the machine.
 
 **![Installation of prerequisites](./imgs/ansible-and-docker-install.png)**
